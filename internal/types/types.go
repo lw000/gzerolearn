@@ -17,3 +17,9 @@ type LoginRequest struct {
 type LoginResponse struct {
 	Token string `json:"toekn"`
 }
+
+type CheckingRequest struct {
+}
+
+type CheckingResponse struct {
+}

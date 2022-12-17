@@ -15,6 +15,12 @@ type (
 	LoginResponse {
 		Token string `json:"toekn"`
 	}
+
+	CheckingRequest {
+	}
+
+	CheckingResponse {
+	}
 )
 
 service greet-api {
@@ -23,4 +29,7 @@ service greet-api {
 	
 	@handler LoginHandler
 	get /greet/login(LoginRequest) returns (LoginResponse)
+	
+	@handler HealthcheckHandler
+	get /greet/checking(CheckingRequest) returns (CheckingResponse)
 }
