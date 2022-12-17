@@ -4,12 +4,20 @@ services:
     image: redis:alpine
     container_name: docker_redis
     restart: always
-
     #volumes:
     #  - ./data/datadir:/data
     #  - ./data/conf/redis.conf:/usr/local/etc/redis/redis.conf
     #  - ./data/logs:/logs
     #command: redis-server /etc/redis/redis.conf # 覆盖容器启动后默认执行的命令
+  mysqldb:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: lwstar
+      MYSQL_DATABASE: test
+    ports:
+      - "13306:3306"
   zero_learn_v1:
     build:
       context: ./
@@ -18,11 +26,12 @@ services:
     restart: always
     depends_on:
       - redis
-    healthcheck:
-      test: ["CMD", "curl"， "-f", "http://127.0.0.1:8888/ckecking", "||", "exit", "1"]
-      interval: 1m
-      timeout: 10s
-      retries: 3
+      - mysqldb
+#    healthcheck:
+#      test: ["CMD", "curl"， "-f", "http://127.0.0.1:8888/ckecking", "||", "exit", "1"]
+#      interval: 1m
+#      timeout: 10s
+#      retries: 3
   lb:
     image: dockercloud/haproxy
     links:
