@@ -1,0 +1,1 @@
+goctl docker -go greet.go
