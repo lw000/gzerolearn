@@ -28,10 +28,10 @@ services:
       - redis
       - mysqldb
 #    healthcheck:
-#      test: ["CMD", "curl"， "-f", "http://127.0.0.1:8888/ckecking", "||", "exit", "1"]
-#      interval: 1m
+#      test: ["CMD", "curl"， "-f", "http://127.0.0.1:8888/greet/checking"]
+#      interval: 30s
 #      timeout: 10s
-#      retries: 3
+#      retries: 6
   lb:
     image: dockercloud/haproxy
     links:
